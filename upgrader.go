@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"net"
 	"os"
 	"path/filepath"
@@ -298,7 +297,7 @@ func writePIDFile(path string) error {
 		return errors.New("empty initial working directory")
 	}
 
-	fh, err := ioutil.TempFile(dir, file)
+	fh, err := os.CreateTemp(dir, file)
 	if err != nil {
 		return err
 	}

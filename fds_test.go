@@ -2,7 +2,6 @@ package tableflip
 
 import (
 	"io"
-	"io/ioutil"
 	"net"
 	"os"
 	"path/filepath"
@@ -58,7 +57,7 @@ func TestFdsAddPacketConn(t *testing.T) {
 func tempSocket(t *testing.T) (string, func()) {
 	t.Helper()
 
-	temp, err := ioutil.TempDir("", "tableflip")
+	temp, err := os.MkdirTemp("", "tableflip")
 	if err != nil {
 		t.Fatal(err)
 	}
