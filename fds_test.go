@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"sort"
 	"testing"
 )
 
@@ -443,6 +444,11 @@ func TestFdsFiles(t *testing.T) {
 	if len(files) != len(testcases) {
 		t.Fatalf("Expected %d files, got %d", len(testcases), len(files))
 	}
+
+	// Sort files by name to ensure deterministic order
+	sort.Slice(files, func(i, j int) bool {
+		return files[i].Name() < files[j].Name()
+	})
 
 	for i, ff := range files {
 		tc := testcases[i]
